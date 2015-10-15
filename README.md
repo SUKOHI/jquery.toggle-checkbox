@@ -12,7 +12,7 @@ Installation
 =====
 Using bower is the simplest way.
 
-    bower install jquery.togglecheckbox --save-dev
+    bower install jquery.toggle-checkbox --save-dev
 
 Usage
 ====
