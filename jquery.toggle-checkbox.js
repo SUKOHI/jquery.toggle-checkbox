@@ -14,28 +14,34 @@
                 return (TC.isChecked(element)) ? 1 : 0;
 
             },
-            getContent: function(toggleContents, index){
+            getContent: function(index){
 
-                var container = $('<span></span>');
+                var container = $('<span class="toggle-checkbox-container"></span>');
+
                 return container.on('click', function(e){
 
                     var checkbox = $(this).prev();
                     var nextChecked = !TC.getContentIndex(checkbox);
                     var contentIndex = (nextChecked) ? 1 : 0;
-                    var toggleContent = TC.getContent(toggleContents, contentIndex);
+                    var toggleContent = TC.getContent(contentIndex);
 
                     checkbox.after(toggleContent).prop('checked', nextChecked);
                     $(this).remove();
 
-                    if(typeof(callback) == 'function') {
-
-                        callback(e, checkbox);
-
-                    }
+                    TC.fireCallback();
 
                 })
                 .css('cursor', 'pointer')
                 .html(toggleContents[index]);
+
+            },
+            fireCallback: function(){
+
+                if(typeof(callback) == 'function') {
+
+                    callback(e, checkbox);
+
+                }
 
             }
 
@@ -44,8 +50,23 @@
         $.each(this, function(key, element){
 
             var contentIndex = TC.getContentIndex(element);
-            var toggleContent = TC.getContent(toggleContents, contentIndex);
-            $(element).after(toggleContent).css('display', 'none');
+            var toggleContent = TC.getContent(contentIndex);
+            $(element).after(toggleContent)
+                .css('display', 'none')
+                .on('change', function(){
+
+                    var className = $(this).next().attr('class');
+
+                    if(className == 'toggle-checkbox-container') {
+
+                        $(this).next().remove();
+                        var contentIndex = TC.getContentIndex(this);
+                        var toggleContent = TC.getContent(contentIndex);
+                        $(this).after(toggleContent)
+
+                    }
+
+            });
 
         });
 

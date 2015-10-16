@@ -45,6 +45,17 @@ in JavaScript
 
     });
 
+**Changing checked value by event**
+
+    $('#all_check_button').on('click', function(){
+
+        var checked = $(this).is(':checked');
+        $('.toggle-checkbox').prop('checked', checked).change();
+
+    });
+    
+*You need call change().
+
 License
 ====
 
