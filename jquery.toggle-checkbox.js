@@ -27,15 +27,14 @@
 
                     checkbox.after(toggleContent).prop('checked', nextChecked);
                     $(this).remove();
-
-                    TC.fireCallback();
+                    TC.fireCallback(e, checkbox);
 
                 })
                 .css('cursor', 'pointer')
                 .html(toggleContents[index]);
 
             },
-            fireCallback: function(){
+            fireCallback: function(e, checkbox){
 
                 if(typeof(callback) == 'function') {
 
@@ -53,7 +52,7 @@
             var toggleContent = TC.getContent(contentIndex);
             $(element).after(toggleContent)
                 .css('display', 'none')
-                .on('change', function(){
+                .on('change', function(e){
 
                     var className = $(this).next().attr('class');
 
@@ -62,7 +61,8 @@
                         $(this).next().remove();
                         var contentIndex = TC.getContentIndex(this);
                         var toggleContent = TC.getContent(contentIndex);
-                        $(this).after(toggleContent)
+                        $(this).after(toggleContent);
+                        TC.fireCallback(e, $(this));
 
                     }
 
