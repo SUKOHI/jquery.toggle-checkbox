@@ -1,6 +1,8 @@
 # jquery.toggle-checkbox
 A jQuery plugin to replace input checkbox with specific contents like icons.
 
+This package is not under maintenance because it was integrated with [jquery.toggle-check](https://github.com/SUKOHI/jquery.toggle-check).
+
 ![サンプル画像](http://i.imgur.com/WyqwhnQ.png) 
 
 Requirements
